@@ -7,3 +7,5 @@ A custom bot for the server Game4Life!
 **m.close** - Closes the ModMail ticket.
 
 **m.open** - Reopens the ticket.
+
+**m.help** - Shows the help command, which lists all of the commands it has.
