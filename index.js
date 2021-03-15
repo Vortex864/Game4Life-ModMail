@@ -3,10 +3,10 @@ const client = new discord.Client()
 const { token, prefix, ServerID } = require("./config.json")
 
 client.on("ready", () => {
-console.log("I am ready to receive and Send Mails!")
+console.log("I am ready to receive and help!")
 
 
-client.user.setActivity("With My DMs for help!")
+client.user.setActivity("with my DMs for help!")
 })
 
 client.on("channelDelete", (channel) => {
@@ -16,10 +16,10 @@ client.on("channelDelete", (channel) => {
         if(!person) return;
 
         let yembed = new discord.MessageEmbed()
-        .setAuthor("MAIL DELETED", client.user.displayAvatarURL())
+        .setAuthor("Modmail deletion", client.user.displayAvatarURL())
         .setColor('RED')
         .setThumbnail(client.user.displayAvatarURL())
-        .setDescription("Your mail is deleted by the moderator and if you have any problem with that than you can open mail again by sending message here.")
+        .setDescription("Your Mail has been deleted by the Moderator. You can open your thread, by sending a message here, again.")
     return person.send(yembed)
     
     }
@@ -38,11 +38,11 @@ client.on("message", async message => {
   if(message.guild) {
       if(command == "setup") {
           if(!message.member.hasPermission("MANAGE_MESSAGES")) {
-              return message.channel.send("You need the staff roles to setup the modmail system!")
+              return message.channel.send("You need staff roles to setup the modmail system!")
           }
 
           if(!message.guild.me.hasPermission("ADMINSTRATOR")) {
-              return message.channel.send("Bot need Admin Permissions to setup the modmail system!")
+              return message.channel.send("The bot needs the Administrator Permission to setup the modmail system!")
           }
 
 
@@ -75,7 +75,7 @@ client.on("message", async message => {
           })
 
 
-          return message.channel.send("Setup is Completed :D")
+          return message.channel.send("The setup is done!")
 
       } else if(command == "close") {
 
@@ -85,7 +85,7 @@ client.on("message", async message => {
             const person = message.guild.members.cache.get(message.channel.name)
 
             if(!person) {
-                return message.channel.send("I am Unable to close the channel and this error is coming because probably channel name is changed.")
+                return message.channel.send("Unfortunately, I am unable to close this thread. Probably, the user has blocked me or the channel name got changed.")
             }
 
             await message.channel.delete()
@@ -104,11 +104,11 @@ client.on("message", async message => {
           const category = message.guild.channels.cache.find((x) => x.name == "MODMAIL")
 
           if(!category) {
-              return message.channel.send("Moderation system is not setuped in this server, use " + prefix + "setup")
+              return message.channel.send("The Modmail system isn't setup-ed in this server, use " + prefix + "setup to setup the Modmail system ")
           }
 
-          if(!message.member.roles.cache.find((x) => x.name == "Members")) {
-              return message.channel.send("You need staff role to use this command")
+          if(!message.member.roles.cache.find((x) => x.name == "Staff")) {
+              return message.channel.send("You need the staff role to use this command")
           }
 
           if(isNaN(args[0]) || !args.length) {
@@ -143,7 +143,7 @@ client.on("message", async message => {
           .setAuthor("DIRECT MAIL OPENED")
           .setColor("GREEN")
           .setThumbnail(client.user.displayAvatarURL())
-          .setDescription("You have been contacted by Supporter of **" + message.guild.name + "**, Please wait until he send another message to you!");
+          .setDescription("You have been contacted by the Staff of **" + message.guild.name + "**, Please wait until he sends another message to you!");
           
           
           target.send(uembed);
@@ -159,11 +159,11 @@ client.on("message", async message => {
           .setColor("GREEN")
           
         .setDescription("This bot is made by Vortex864!")
-        .addField(prefix + "setup", "Setup the modmail system(This is not for multiple server.)", true)
+        .addField(prefix + "setup", "This command sets up the Modmail system for this server (This isn't accesible for multiple servers).", true)
   
-        .addField(prefix + "open", 'Let you open the mail to contact anyone with his ID', true)
+        .addField(prefix + "open", 'Reopens the thread.', true)
         .setThumbnail(client.user.displayAvatarURL())
-                    .addField(prefix + "close", "Close the mail in which you use this command.", true);
+                    .addField(prefix + "close", "Closes the thread.", true);
 
                     return message.channel.send(embed)
           
@@ -178,12 +178,12 @@ client.on("message", async message => {
   
   if(message.channel.parentID) {
 
-    const category = message.guild.channels.cache.find((x) => x.name == "MODMAIL")
+    const category = message.guild.channels.cache.find((x) => x.name == "Modmail")
     
     if(message.channel.parentID == category.id) {
         let member = message.guild.members.cache.get(message.channel.name)
     
-        if(!member) return message.channel.send('Unable To Send Message')
+        if(!member) return message.channel.send('My apologies, I cannot send the message to the user.')
     
         let lembed = new discord.MessageEmbed()
         .setColor("GREEN")
@@ -226,7 +226,7 @@ client.on("message", async message => {
           })
 
           let sembed = new discord.MessageEmbed()
-          .setAuthor("MAIN OPENED")
+          .setAuthor("MAIL OPENED")
           .setColor("GREEN")
           .setThumbnail(client.user.displayAvatarURL())
           .setDescription("Conversation is now started, you will be contacted by supporters soon :D")
@@ -241,7 +241,7 @@ client.on("message", async message => {
           .setDescription(message.content)
           .addField("Name", message.author.username)
           .addField("Account Creation Date", message.author.createdAt)
-          .addField("Direct Contact", "No(it means this mail is opened by person not a supporter)")
+          .addField("Direct Contact", "No (it means this mail is opened by person not the staff).")
 
 
         return mx.send(eembed)
