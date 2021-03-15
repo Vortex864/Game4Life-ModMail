@@ -6,7 +6,7 @@ client.on("ready", () => {
 console.log("I am ready to receive and Send Mails!")
 
 
-client.user.setActivity("Watching My DMs for help!")
+client.user.setActivity("With My DMs for help!")
 })
 
 client.on("channelDelete", (channel) => {
