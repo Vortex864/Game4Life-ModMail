@@ -2,12 +2,12 @@ const discord = require("discord.js");
 const client = new discord.Client() 
 const { token, prefix, ServerID } = require("./config.json")
 
-client.on("ready", () => {
-console.log("I am ready to receive and help!")
-
-
-client.user.setActivity("with my DMs for help!")
-})
+client.on("ready", () =>{
+    console.log(`I am ready to help!`);
+    client.user.setActivity("DMs for help!", {
+    type: "WATCHING"
+    
+});
 
 client.on("channelDelete", (channel) => {
     if(channel.parentID == channel.guild.channels.cache.find((x) => x.name == "MODMAIL").id) {
